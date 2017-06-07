@@ -1,0 +1,23 @@
+{
+  "name": "the-kiln",
+  "version": "1.0.0",
+  "description": "A graphing and data visualization library companion to the Milieu Opinion Extraction Engine",
+  "main": "graph.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Milieucitiesrepo/the-kiln.git"
+  },
+  "keywords": [
+    "data",
+    "visualization"
+  ],
+  "author": "Claire Lesage",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Milieucitiesrepo/the-kiln/issues"
+  },
+  "homepage": "https://github.com/Milieucitiesrepo/the-kiln#readme"
+}

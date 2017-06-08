@@ -14,4 +14,6 @@ function getConcepts() {
 		
 	}
 	return conceptsArr;
-}	
+}
+
+console.log(getConcepts())

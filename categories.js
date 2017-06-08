@@ -5,7 +5,7 @@ const mainCategoriesArr = [];
 const finalArr = [];
 const re = new RegExp('\/([a-z]*)\/');
 
-//this will create an array of objects of {text: tally}
+//this will create an array of objects of {text: count}
 
 function getCategories() {
 	for (var i in data) {

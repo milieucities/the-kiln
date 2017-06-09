@@ -4,7 +4,6 @@ const fs = require('fs')
 //this will create an array of objects of {text: tally}
 
 function getDemographic() {
-	var frequencies = [];
 	var demoObj = {};
   for (var i in data) {
     var answer = data[i].text

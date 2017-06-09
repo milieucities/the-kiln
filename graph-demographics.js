@@ -20,29 +20,37 @@ nv.addGraph(function() {
 
 function exampleData() {
   return  [
-      {
-        "label": "3-4 months a year",
-        "value" : 87
-      } ,
-      {
-        "label": "7-9 months a year",
-        "value" : 126
-      } ,
-      {
-        "label": "5-6 months a year",
-        "value" : 183
-      } ,
-      {
-        "label": "All year long",
-        "value" : 68
-      } ,
-      {
-        "label": "Never",
-        "value" : 15
-      } ,
-      {
-        "label": "1-2 months a year",
-        "value" : 15
-      }
-    ];
+  {
+    "label": "Response",
+    "value": 1
+  },
+  {
+    "label": "3-4 months a year",
+    "value": 88
+  },
+  {
+    "label": "7-9 months a year",
+    "value": 127
+  },
+  {
+    "label": "5-6 months a year",
+    "value": 184
+  },
+  {
+    "label": "All year long",
+    "value": 69
+  },
+  {
+    "label": "Never",
+    "value": 16
+  },
+  {
+    "label": "1-2 months a year",
+    "value": 16
+  },
+  {
+    "label": "Toute l’année",
+    "value": 2
+  }
+];
 }

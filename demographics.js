@@ -1,27 +1,21 @@
 const data = require('./data/demo-example.json')
 const fs = require('fs')
 
-const demoArr = [];
-const demoObj = {};
-
 //this will create an array of objects of {text: tally}
 
 function getDemographic() {
-	for (var i in data) {
-		var answer = data[i].text
-		demoObj[answer] = (demoObj[answer] || 0) + 1;
-		newObj = {
-			label: answer, 
-			value: demoObj[answer]
-		}
-		// console.log(newObj)
-		demoArr.push(newObj)
-	}
-	console.log(demoArr);
-}	
+	var frequencies = [];
+	var demoObj = {};
+  for (var i in data) {
+    var answer = data[i].text
+    demoObj[answer] = (demoObj[answer] || 0) + 1;
+  }
+  console.log(demoObj);
+}
 
 
-getDemographic();
+getDemographic(data)
+
 
 function writeToJSON(obj) {
     fs.writeFile(`demographic.json`, JSON.stringify(obj, null, "  "), function (err) {
@@ -31,3 +25,4 @@ function writeToJSON(obj) {
       console.log(`Success! Check demographic.json`);
     });
 }
+

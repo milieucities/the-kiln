@@ -1,6 +1,5 @@
-const data = require('./data/demo-example.json')
-const fs = require('fs')
-
+const data = require(process.argv[2]);
+const fs = require('fs');
 //this will create an array of objects of {text: tally}
 function getDemographic() {
 	var demoObj = {};
@@ -23,11 +22,10 @@ function toLabeledSequence (m) {
 getDemographic(data)
 
 function writeToJSON(obj) {
-    fs.writeFile(`demographics.json`, JSON.stringify(obj, null, "  "), function (err) {
+    fs.writeFile(`./results/demo-${process.argv[2].replace("./data/", "")}`, JSON.stringify(obj, null, "  "), function (err) {
       if (err) {
         console.log(err, `Cannot write output file.`)
       }
-      console.log(`Success! Check demographic.json`);
+      console.log(`Success! Check ./results/demographics-${process.argv[2].replace("./data/", "")}`);
     });
 }
-

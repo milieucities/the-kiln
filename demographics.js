@@ -22,10 +22,11 @@ function toLabeledSequence (m) {
 getDemographic(data)
 
 function writeToJSON(obj) {
-    fs.writeFile(`./results/demo-${process.argv[2].replace("./data/", "")}`, JSON.stringify(obj, null, "  "), function (err) {
+    fs.writeFile(`./results/demographics/data.json`, JSON.stringify(obj, null, "  "), function (err) {
       if (err) {
         console.log(err, `Cannot write output file.`)
       }
-      console.log(`Success! Check ./results/demographics-${process.argv[2].replace("./data/", "")}`);
+      console.log(`Success! Check ./results/demographics/data.json`);
     });
 }
+//${process.argv[2].replace("./data/", "")

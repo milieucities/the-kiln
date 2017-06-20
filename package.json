@@ -1,23 +1,30 @@
 {
   "name": "the-kiln",
   "version": "1.0.0",
-  "description": "A graphing and data visualization library companion to the Milieu Opinion Extraction Engine",
-  "main": "graph.js",
+  "description": "A fiery graphing and data visualisation library for the Milieu Opinion Extraction Engine (MOEE). Where data gets baked into the decision-making.",
+  "main": "graph-demographics.js",
+  "directories": {
+    "lib": "lib"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Milieucitiesrepo/the-kiln.git"
   },
-  "keywords": [
-    "data",
-    "visualization"
-  ],
-  "author": "Claire Lesage",
+  "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Milieucitiesrepo/the-kiln/issues"
   },
-  "homepage": "https://github.com/Milieucitiesrepo/the-kiln#readme"
+  "homepage": "https://github.com/Milieucitiesrepo/the-kiln#readme",
+  "dependencies": {
+    "d3": "^4.9.1",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "jquery": "^3.2.1",
+    "nvd3": "^1.8.5"
+  }
 }

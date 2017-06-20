@@ -10,13 +10,17 @@ nv.addGraph(function() {
       .donutRatio(0.35)     //Configure how big you want the donut hole size to be.
       ;
 
-    d3.select("#chart2 svg")
-        .datum(exampleData())
+    var data; //a global
+    d3.json(require['./data/demographics.json'], function(json, error){ 
+      if (error) {
+      	return console.error(error);
+      }
+      d3.select("#chart svg")
+        .data(json)
         .transition().duration(350)
         .call(chart);
-
-  return chart;
-});
+  })
+})
 
 function exampleData() {
   return  [

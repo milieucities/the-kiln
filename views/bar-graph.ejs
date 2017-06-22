@@ -17,8 +17,8 @@
         html, body, #chart, svg {
             margin: 0px;
             padding: 0px;
-            height: 100%;
-            width: 100%;
+            height: 90%;
+            width: 80%;
         }
     </style>
 </head>
@@ -29,10 +29,7 @@
 </div>
 
 <script>
-  var piedata = <%- JSON.stringify(datajson) %>
-  var pieArr = []
-  pieArr.push(piedata)
-  console.log([piedata])
+  var data = <%- JSON.stringify(datajson) %>
     nv.addGraph(function() {
         var chart = nv.models.discreteBarChart()
             .x(function(d) { return d.label })
@@ -43,7 +40,7 @@
             .duration(250)
             ;
         d3.select('#chart svg')
-            .datum([piedata])
+            .datum([data])
             .call(chart);
         nv.utils.windowResize(chart.update);
         return chart;

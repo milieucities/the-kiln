@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="./lib/nv.d3.css" rel="stylesheet" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.2/d3.min.js" charset="utf-8"></script>
+    <script src="./lib/nv.d3.js"></script>
+    <script src="./lib/stream_layers.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <style>
+        text {
+            font: 12px sans-serif;
+        }
+        svg {
+            display: block;
+        }
+        html, body, #chart1, svg {
+            margin: 0px;
+            padding: 0px;
+            height: 80%;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="chart1" class='with-3d-shadow with-transitions'>
+    <svg></svg>
+</div>
+
+<script>
+  var data = <%- JSON.stringify(datajson) %>
+  var chart;
+  nv.addGraph(function() {
+      chart = nv.models.multiBarHorizontalChart()
+          .x(function(d) { return d.label })
+          .y(function(d) { return d.value })
+          // .yErr(function(d) { return [-Math.abs(d.value * Math.random() * 0.3), Math.abs(d.value * Math.random() * 0.3)] })
+          .barColor(d3.scale.category20().range())
+          .duration(250)
+          .showControls(true)
+          // .showLegend(true)
+          .margin({left: 100})
+          .stacked(true);
+      chart.yAxis.tickFormat(d3.format(',.2f'));
+      chart.yAxis.axisLabel('Y Axis');
+      // chart.xAxis.axisLabel('X Axis').axisLabelDistance(20);
+      d3.select('#chart1 svg')
+          .datum([data])
+          .call(chart);
+      nv.utils.windowResize(chart.update);
+      chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+      chart.state.dispatch.on('change', function(state){
+          nv.log('state', JSON.stringify(state));
+      });
+      return chart;
+  });
+</script>
+</body>
+</html>

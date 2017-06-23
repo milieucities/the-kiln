@@ -2,15 +2,17 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8080; // default port 8080
 const path = require('path');
+const bodyParser = require('body-parser')
 const json = require('./data/demographics.json')
 const watson = require('./data/keywords.json')
+const treemapdata = require('./data/treeMapDataModel.json')
 
 app.set('view engine', 'ejs')
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/lib',  express.static(__dirname + '/lib'));
-app.use('/scripts',  express.static(__dirname + '/scripts'));
 app.use('/data',  express.static(__dirname + '/data'));
+app.use('/scripts',  express.static(__dirname + '/scripts'));
 
 //json data is passed in as templateVars
 app.get("/pie", (req, res) => {
@@ -33,8 +35,33 @@ app.get("/sankey", (req, res) => {
 	res.render('sankey-graph', templateVars)
 });
 
+app.get("/tree-map", (req, res) => {
+	var templateVars = {datajson: treemapdata}
+	res.render('treemap', templateVars)
+});
+
+app.get("/tree-map.json", (req, res) => {
+	res.json(treemapdata)
+});
+
 app.listen(PORT)
 console.log(`App listening on localhost:${PORT}!`)
 
-// [{"key":"Cumulative Return","values":[{"label":"A","value":29.765957771107},{"label":"B","value":0},{"label":"C","value":32.807804682612},{"label":"D","value":196.45946739256},{"label":"E","value":0.19434030906893},{"label":"F","value":98.079782601442},{"label":"G","value":13.925743130903},{"label":"H","value":5.1387322875705}]}]'
 
+// var jsonfile = require('jsonfile');
+
+// exports.getStaticJSONFile = function(req, res) {
+
+//   var fileName = req.params.fileName;
+//   var file = path.normalize(__dirname + '/' + treeMapDataModel.json);
+//   console.log('path: ' + file);
+
+//   jsonfile.readFile(file, function(err, obj) {
+//     if(err) {
+//       res.json({status: 'error', reason: err.toString()});
+//       return;
+//     }
+
+//     res.json(obj);
+//   });
+// };

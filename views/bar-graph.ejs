@@ -17,19 +17,22 @@
         html, body, #chart, svg {
             margin: 0px;
             padding: 0px;
-            height: 90%;
-            width: 80%;
+            height: 100%;
+            width: 100%;
         }
     </style>
 </head>
 <body>
 
 <div id="chart">
-    <svg></svg>
+    <svg id ="svg"></svg>
 </div>
-
+<button id="generate">Save as SVG</button>
+<canvas id="canvas"></canvas>
+<script src="../scripts/FileSaver.js"></script>
 <script>
   var data = <%- JSON.stringify(datajson) %>
+  var DOMURL = self.URL || self.webkitURL || self;
     nv.addGraph(function() {
         var chart = nv.models.discreteBarChart()
             .x(function(d) { return d.label })
@@ -39,12 +42,57 @@
             .showValues(true)
             .duration(250)
             ;
+
+        var width = '100%';
+        var height = '100%';
+        var svg = d3.select('#chart svg')
+          .attr('width', width)
+          .attr('height',height);
         d3.select('#chart svg')
             .datum([data])
             .call(chart);
         nv.utils.windowResize(chart.update);
-        return chart;
+        
+        d3.select("#generate")
+            .on("click", writeDownloadLink);
+
+        function writeDownloadLink(){
+            try {
+                var isFileSaverSupported = !!new Blob();
+            } catch (e) {
+                alert("blob not supported");
+            }
+
+            var html = d3.select("svg")
+                .attr("title", "test2")
+                .attr("version", 1.1)
+                .attr("xmlns", "http://www.w3.org/2000/svg")
+                .node().parentNode.innerHTML;
+
+            var blob = new Blob([html], {type: "image/svg+xml"});
+            saveAs(blob, "barGraph.svg");
+        };
+          return chart;
     });
+;
+
+
+    //for saving svg
+
+    // var html = d3.select("svg")
+    //     .attr("title", "test2")
+    //     .attr("version", 1.1)
+    //     .attr("xmlns", "http://www.w3.org/2000/svg")
+    //     .node().parentNode.innerHTML
+
+    //     var xmlSerializer = new XMLSerializer();
+    //     var svg_blob = new Blob([xmlSerializer.serializeToString(html)], {
+    //      type: 'image/svg+xml;charset=utf-8'
+    //     });
+    //     saveAs(svg_blob, "myProfile.svg");
+    // };
+
+
 </script>
 </body>
 </html>

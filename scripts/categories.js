@@ -1,4 +1,4 @@
-const data = require('./data/example.json')
+const data = require('../data/watson-example.json')
 
 const categoriesArr = [];
 const mainCategoriesArr = [];

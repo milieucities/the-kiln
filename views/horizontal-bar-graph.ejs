@@ -17,8 +17,8 @@
         html, body, #chart1, svg {
             margin: 0px;
             padding: 0px;
-            height: 80%;
-            width: 90%;
+            height: 100%;
+            width: 100%;
         }
     </style>
 </head>
@@ -27,7 +27,8 @@
 <div id="chart1" class='with-3d-shadow with-transitions'>
     <svg></svg>
 </div>
-
+<button id="generate">Save as SVG</button>
+<script src="../scripts/FileSaver.js"></script>
 <script>
   var data = <%- JSON.stringify(datajson) %>
   var chart;
@@ -38,12 +39,12 @@
           // .yErr(function(d) { return [-Math.abs(d.value * Math.random() * 0.3), Math.abs(d.value * Math.random() * 0.3)] })
           .barColor(d3.scale.category20().range())
           .duration(250)
-          .showControls(true)
+          // .showControls(true)
           // .showLegend(true)
           .margin({left: 100})
           .stacked(true);
       chart.yAxis.tickFormat(d3.format(',.2f'));
-      chart.yAxis.axisLabel('Y Axis');
+      chart.yAxis.axisLabel('sentiment score');
       // chart.xAxis.axisLabel('X Axis').axisLabelDistance(20);
       d3.select('#chart1 svg')
           .datum([data])
@@ -53,6 +54,26 @@
       chart.state.dispatch.on('change', function(state){
           nv.log('state', JSON.stringify(state));
       });
+
+      d3.select("#generate")
+          .on("click", writeDownloadLink);
+
+      function writeDownloadLink(){
+          try {
+              var isFileSaverSupported = !!new Blob();
+          } catch (e) {
+              alert("blob not supported");
+          }
+
+          var html = d3.select("svg")
+              .attr("title", "test2")
+              .attr("version", 1.1)
+              .attr("xmlns", "http://www.w3.org/2000/svg")
+              .node().parentNode.innerHTML;
+
+          var blob = new Blob([html], {type: "image/svg+xml"});
+          saveAs(blob, "barGraph.svg");
+      };
       return chart;
   });
 </script>

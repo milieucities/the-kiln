@@ -6,6 +6,7 @@ const bodyParser = require('body-parser')
 const json = require('./data/demographics.json')
 const watson = require('./data/keywords.json')
 const treemapdata = require('./data/treeMapDataModel.json')
+const cars = require('./data/cars.json')
 
 app.set('view engine', 'ejs')
 
@@ -26,7 +27,7 @@ app.get("/bar", (req, res) => {
 });
 
 app.get("/horizontal-bar", (req, res) => {
-	var templateVars = {datajson: {"key": "barchart", "values": json}}
+	var templateVars = {datajson: {"key": "barchart", "values": watson}}
 	res.render('horizontal-bar-graph', templateVars)
 });
 
@@ -42,6 +43,15 @@ app.get("/tree-map", (req, res) => {
 
 app.get("/tree-map.json", (req, res) => {
 	res.json(treemapdata)
+});
+
+app.get("/parallel-coordinates", (req, res) => {
+	var templateVars = {datajson: json}
+	res.render('parallel-coordinates', templateVars)
+});
+
+app.get("/cars.json", (req, res) => {
+	res.json(cars)
 });
 
 app.listen(PORT)

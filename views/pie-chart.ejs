@@ -10,6 +10,7 @@
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body>
+  <script src="../scripts/FileSaver.js"></script>
   <script>
   var piedata = <%- JSON.stringify(datajson) %>
   var width = 600;
@@ -34,8 +35,31 @@
       .attr('height', height)
       .transition().duration(350)
       .call(chart);
-  })
+
+    d3.select("#generate")
+        .on("click", writeDownloadLink);
+
+    function writeDownloadLink(){
+        try {
+            var isFileSaverSupported = !!new Blob();
+        } catch (e) {
+            alert("blob not supported");
+        }
+
+        var html = d3.select("svg")
+            .attr("title", "test2")
+            .attr("version", 1.1)
+            .attr("xmlns", "http://www.w3.org/2000/svg")
+            .node().parentNode.innerHTML;
+
+        var blob = new Blob([html], {type: "image/svg+xml"});
+        saveAs(blob, "pieGraph.svg");
+    };
+    return chart;
+});
+
 </script>
-<div> <svg id="chart"></svg></div>
+<div><svg id="chart"></svg></div>
+<button id="generate">Save as SVG</button>
 </body>
 </html>

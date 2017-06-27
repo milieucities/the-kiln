@@ -28,11 +28,9 @@
     <svg id ="svg"></svg>
 </div>
 <button id="generate">Save as SVG</button>
-<canvas id="canvas"></canvas>
 <script src="../scripts/FileSaver.js"></script>
 <script>
   var data = <%- JSON.stringify(datajson) %>
-  var DOMURL = self.URL || self.webkitURL || self;
     nv.addGraph(function() {
         var chart = nv.models.discreteBarChart()
             .x(function(d) { return d.label })
